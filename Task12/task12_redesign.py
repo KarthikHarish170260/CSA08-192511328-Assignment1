@@ -260,12 +260,15 @@ def run_tests():
 
     # ── Ten-day total v2 ──────────────────────────────────────────────────────
     print("\n[5] Ten-day total with bonus (normal season)")
-    # 20 deliveries of 30 litres each → 600 litres → bonus applies
-    entries_large = [(30.0, 3.5, 8.5)] * 20   # 20 × 300 = 6 000 milk total
+    # 20 deliveries of 30 litres each → 600 litres total → bonus applies
+    # payout per delivery = 30 × 30.00 = 900.00
+    # milk_total = 20 × 900.00 = 18000.00
+    # bonus = 600 × 0.50 = 300.00
+    entries_large = [(30.0, 3.5, 8.5)] * 20
     result = ten_day_total_v2(entries_large, "normal")
-    check("milk_total  = 6000.00", result["milk_total"],   6000.00)
-    check("bonus_amount = 300.00", result["bonus_amount"],  300.00)
-    check("grand_total  = 6300.00",result["grand_total"],  6300.00)
+    check("milk_total  = 18000.00", result["milk_total"],   18000.00)
+    check("bonus_amount =  300.00", result["bonus_amount"],   300.00)
+    check("grand_total  = 18300.00",result["grand_total"],  18300.00)
 
     # Below threshold – no bonus
     entries_small = [(10.0, 3.5, 8.5)] * 5    # 50 litres
