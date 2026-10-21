@@ -128,18 +128,8 @@ def rate_per_litre_v2(fat: float, snf: float, season: str = "normal") -> float:
     33...
     """
     rc = select_rate_card(season)
-    # Use Decimal for exact step counting with 2-decimal inputs
-    fat_dec   = Decimal(str(fat))
-    snf_dec   = Decimal(str(snf))
-    base_fat  = Decimal(str(BASE_FAT))
-    base_snf  = Decimal(str(BASE_SNF))
-    step_size = Decimal(str(FAT_STEP_SIZE))
-
-    fat_steps = int((fat_dec - base_fat).quantize(Decimal("1"), rounding=ROUND_HALF_UP)
-                    / step_size.quantize(Decimal("1")) * Decimal("1")
-                    + Decimal("0"))                         # simplified below ↓
-
-    # Simpler equivalent using round():
+    # round() correctly handles 2-decimal inputs:
+    # e.g. fat=4.23 → (4.23-3.5)/0.1 = 7.3 → round(7.3) = 7 ✓
     fat_steps = round((fat - BASE_FAT) / FAT_STEP_SIZE)
     snf_steps = round((snf - BASE_SNF) / SNF_STEP_SIZE)
 
