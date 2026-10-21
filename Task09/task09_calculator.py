@@ -87,7 +87,7 @@ def run_tests():
     check("Lowest fat boundary (2.0%)  rate",            rate_per_litre(2.0, 8.5), 24.00)
     check("Highest fat boundary (7.0%) rate",            rate_per_litre(7.0, 8.5), 44.00)
     check("Lowest snf boundary (7.0%)  rate",            rate_per_litre(3.5, 7.0), 25.50)
-    check("Highest snf boundary (9.5%) rate",            rate_per_litre(3.5, 9.5), 34.50)
+    check("Highest snf boundary (9.5%) rate",            rate_per_litre(3.5, 9.5), 33.00)
 
     # ── Group 3: Invalid entries ──────────────────────────────────────────────
     print("\n[3] Invalid entries (validate_entry must detect errors)")
@@ -114,9 +114,9 @@ def run_tests():
         ( 7.0, 4.0, 8.5),
     ]
     total = ten_day_total(batch)
-    # rate(3.8,8.6)=30+3×0.4+1×0.3=31.90; payout=9×31.90=287.10
+    # rate(3.8,8.6)=30+3×0.4+1×0.3=31.50; payout=9×31.50=283.50
     # rate(4.0,8.5)=30+5×0.4=32.00; payout=7×32.00=224.00
-    expected_total = round(300.00 + 283.90 + 333.60 + 287.10 + 224.00, 2)
+    expected_total = round(300.00 + 283.90 + 333.60 + 283.50 + 224.00, 2)
     check(f"5-entry total = Rs {expected_total}", total, expected_total)
 
     # ── Group 5: Invalid entries in batch are skipped ─────────────────────────
